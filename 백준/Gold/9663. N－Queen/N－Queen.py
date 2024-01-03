@@ -32,7 +32,7 @@ for i in range(n//2):
     check_rightcross[i] = 0
 ret = ret*2
 
-if n%2: #홀수일경우
+if n%2: 
     i=n//2
     check_row[i] = 1
     check_leftcross[n-i] = 1
