@@ -3,7 +3,6 @@ import sys
 input = sys.stdin.readline
 dy, dx = [0, 0, 1, -1], [1, -1, 0, 0]
 
-# 입력
 N, M = map(int, input().split())
 graph = [list(map(int, input().split())) for _ in range(N)]
 able = []
@@ -18,7 +17,6 @@ for y in range(N):
 
 combi = list(combinations(able, 3))
 
-# 로직
 def bfs(wall, virus, g):
     cp = [row[:] for row in g]
     cv = virus[:]
@@ -35,7 +33,6 @@ def bfs(wall, virus, g):
                 cv.append((ny, nx))
     return cp
 
-# 출력
 answer = 0
 for c in combi:
     count = 0
