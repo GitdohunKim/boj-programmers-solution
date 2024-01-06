@@ -1,24 +1,34 @@
 from collections import deque
-N, M = map(int, input().split())
-edges = [[] for _ in range(N+1)]
-degree = [0 for _ in range(N+1)]
-for _ in range(M):
-    a, b = map(int, input().split())
-    edges[a].append(b)
-    degree[b] += 1
 
-q = deque()
-r = []
-for i in range(1, N+1):
-    if degree[i] == 0:
-        q.append(i)
+def topological_sort(N, M, edges):
+    A = [[] for _ in range(N + 1)]
+    D = [0] * (N + 1)
 
-while q:
-    a = q.popleft()
-    r.append(a)
-    for i in edges[a]:
-        degree[i] -= 1
-        if degree[i] == 0:
-            q.append(i)
+    for start, end in edges:
+        A[start].append(end)
+        D[end] += 1
 
-print(*r)
+    queue = deque()
+
+    for i in range(1, N + 1):
+        if D[i] == 0:
+            queue.append(i)
+
+    result = []
+    while queue:
+        now = queue.popleft()
+        result.append(now)
+        for next_node in A[now]:
+            D[next_node] -= 1
+            if D[next_node] == 0:
+                queue.append(next_node)
+
+    return result
+
+if __name__ == "__main__":
+    N, M = map(int, input().split())
+    edges = [list(map(int, input().split())) for _ in range(M)]
+
+    result = topological_sort(N, M, edges)
+
+    print(*result)
