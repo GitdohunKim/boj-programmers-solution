@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 34280 KB, 시간: 204 ms
+메모리: 34148 KB, 시간: 188 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2023년 12월 11일 15:13:07
+2024년 1월 7일 15:49:59
 
 ### 문제 설명
 
@@ -103,8 +103,8 @@
 <table class="table">
 	<tbody>
 		<tr>
-			<td style="text-align:center"><img alt="" src="https://onlinejudgeimages.s3-ap-northeast-1.amazonaws.com/problem/12094/21.png" style="height:250px; width:249px"></td>
-			<td style="text-align:center"><img alt="" src="https://onlinejudgeimages.s3-ap-northeast-1.amazonaws.com/problem/12094/22.png" style="height:250px; width:249px"></td>
+			<td style="text-align:center"><img alt="" src="" style="height:250px; width:249px"></td>
+			<td style="text-align:center"><img alt="" src="" style="height:250px; width:249px"></td>
 		</tr>
 	</tbody>
 	<tfoot>
