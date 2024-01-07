@@ -1,69 +1,46 @@
 import sys
-input = sys.stdin.readline
-sys.setrecursionlimit(10**6)
-from collections import deque
-n = int(input())
 
+def dfs(x, y, cnt, L, R):
+    global ans
+    if x == n:
+        ans = max(cnt, ans)
+        return
 
-table = [list(map(int,input().split())) for _ in range(n)]
-black_table = [t[:] for t in table]
-white_table = [t[:] for t in table]
-for i in range(n):
-    for j in range(n):
-        if (i+j) % 2 == 0:
-            black_table[i][j] = 0
+    if y >= n:
+        if n % 2 == 0:
+            if y == n:
+                dfs(x+1, 1, cnt, L, R)
+            else:
+                dfs(x+1, 0, cnt, L, R)
         else:
-            white_table[i][j] = 0
+            if y == n:
+                dfs(x+1, 0, cnt, L, R)
+            else:
+                dfs(x+1, 1, cnt, L, R)
+        return
 
-shop = deque()
+    if board[x][y] == 1 and not L[x+y] and not R[x-y+n-1]:
+        L[x+y] = 1
+        R[x-y+n-1] = 1
+        dfs(x, y+2, cnt+1, L, R)
+        L[x+y] = 0
+        R[x-y+n-1] = 0
+    dfs(x, y+2, cnt, L, R)
 
+if __name__ == "__main__":
+    n = int(input().strip())
+    board = [list(map(int, input().strip().split())) for _ in range(n)]
 
+    def solve():
+        global ans
+        L = [0] * (n * 2 - 1)
+        R = [0] * (n * 2 - 1)
+        ans = 0
+        dfs(0, 0, 0, L, R)
+        b = ans
+        ans = 0
+        dfs(0, 1, 0, L, R)
+        w = ans
+        print(w + b)
 
-
-
-def check(x,y):
-    for a , b in shop:
-        if abs(x - a) == abs(y - b) : return False
-
-    return True
-
-
-answer = 0
-def back_track1(x,y):
-    global answer
-    if x == n -1 and y == n -1 :
-        answer = max(answer , len(shop))
-
-    elif x == n:
-        back_track1(0,y+1)
-    else:
-        if black_table[x][y] == 1 and check(x,y):
-            shop.append((x,y))
-            back_track1(x+1,y)
-            shop.pop()
-            back_track1(x+1,y)
-        else:
-            back_track1(x+1,y)
-
-back_track1(0,0)
-
-def back_track2(x,y):
-    global answer2
-    if x == n and y == n -1 :
-        answer2 = max(answer2 , len(shop))
-
-    elif x == n:
-        back_track2(0,y+1)
-    else:
-        if white_table[x][y] == 1 and check(x,y):
-            shop.append((x,y))
-            back_track2(x+1,y)
-            shop.pop()
-            back_track2(x+1,y)
-        else:
-            back_track2(x+1,y)
-answer2 = 0
-shop = deque()
-back_track2(0,0)
-
-print(answer + answer2)
+    solve()
