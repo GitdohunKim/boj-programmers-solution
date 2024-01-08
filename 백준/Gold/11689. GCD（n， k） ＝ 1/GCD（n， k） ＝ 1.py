@@ -1,10 +1,10 @@
-def euler_phi(target_number: int):
+def euler_phi(target_number: int) -> int:
     result = target_number
     check_number = 2
 
-    while pow(check_number, 2) <= target_number:
-        if not target_number % check_number:
-            while not target_number % check_number:
+    while check_number * check_number <= target_number:
+        if target_number % check_number == 0:
+            while target_number % check_number == 0:
                 target_number //= check_number
             result -= result // check_number
         check_number += 1
